@@ -6,6 +6,15 @@ import './registerServiceWorker'
 
 Vue.config.productionTip = false
 
+window.dataLayer = window.dataLayer || []
+function gtag () {
+  window.dataLayer.push(arguments)
+}
+router.beforeEach((to, from, next) => {
+  gtag('config', 'UA-65053410-2', {'page_path': to.path})
+  next()
+})
+
 new Vue({
   router,
   store,
