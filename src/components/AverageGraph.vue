@@ -72,6 +72,10 @@
       <input type="range" v-model="nenkinStart" :min="retireAge" max="80" step="1"/>
     </div>
     <div>
+      年金受給額:{{nenkin}}
+      <input type="range" v-model="nenkin" min="0" max="400" step="10"/>
+    </div>
+    <div>
       死亡年齢:{{dieAge}}
       <input type="range" v-model="dieAge" :min="retireAge" max="200" step="1"/>
     </div>
