@@ -14,6 +14,9 @@
      gtag('js', new Date());
 
      gtag('config', 'UA-65053410-2');
+     window.addEventListener('hashchange', function(event){
+       gtag('config', 'UA-65053410-2', {'page_path': location.pathname + location.search  + location.hash});
+     });
     </script>
   </head>
   <body>
