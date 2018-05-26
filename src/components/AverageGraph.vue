@@ -62,7 +62,7 @@
     </div>
     <div>
       年収:{{income}}<br/>
-      <input type="range" v-model="income" min="400" max="2000" step="100"/>
+      <input type="range" v-model="income" min="300" max="2000" step="100"/>
     </div>
     <div>
       退職年齢:{{retireAge}}<br/>
