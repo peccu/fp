@@ -129,6 +129,6 @@ text {
   alignment-baseline: middle;
 }
 input[type=range] {
-  width: 97%;
+  width: 80%;
 }
 </style>
