@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <svg width="800" :height="chartHeight" :viewBox="'0 0 800 ' + chartHeight">
+      <svg :width="chartWidth" :height="chartHeight" :viewBox="'0 0 ' + chartWidth + ' ' + chartHeight">
         <!-- <\!-- SVG code goes in here -\-> -->
         <!-- <circle -->
         <!--    v-for="(d, i) in data" -->
@@ -41,7 +41,7 @@
         <text
            :y="30 + ave / zoom"
            :x="offset / 2"
-           >{{ ave }}</text>
+           >{{ Math.round(ave) }}</text>
         <rect
            :x="offset"
            :y="30"
@@ -57,27 +57,28 @@
       </svg>
     </div>
     <div>
-      現在の年齢<input type="text" v-model="age">
+      現在の年齢<br/>
+      <input type="text" v-model="age">
     </div>
     <div>
-      年収:{{income}}
+      年収:{{income}}<br/>
       <input type="range" v-model="income" min="400" max="2000" step="100"/>
     </div>
     <div>
-      退職年齢:{{retireAge}}
-      <input type="range" v-model="retireAge" :min="age" max="120" step="1"/>
+      退職年齢:{{retireAge}}<br/>
+      <input type="range" v-model="retireAge" :min="age" max="100" step="1"/>
     </div>
     <div>
-      年金受給開始年齢:{{nenkinStart}}
+      年金受給開始年齢:{{nenkinStart}}<br/>
       <input type="range" v-model="nenkinStart" :min="retireAge" max="80" step="1"/>
     </div>
     <div>
-      年金受給額:{{nenkin}}
+      年金受給額:{{nenkin}}<br/>
       <input type="range" v-model="nenkin" min="0" max="400" step="10"/>
     </div>
     <div>
-      死亡年齢:{{dieAge}}
-      <input type="range" v-model="dieAge" :min="retireAge" max="200" step="1"/>
+      死亡年齢:{{dieAge}}<br/>
+      <input type="range" v-model="dieAge" :min="retireAge" max="120" step="1"/>
     </div>
   </div>
 </template>
@@ -88,6 +89,7 @@ export default {
   data () {
     return {
       data: [12, 17, 22, 27, 32, 37],
+      chartWidth: document.documentElement.clientWidth,
       chartHeight: 300,
       offset: 40,
       age: 30,
@@ -125,5 +127,8 @@ rect {
 text {
   text-anchor: middle;
   alignment-baseline: middle;
+}
+input[type=range] {
+  width: 97%;
 }
 </style>
