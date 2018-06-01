@@ -1,14 +1,35 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Home</router-link>
-      | <router-link to="/about">About</router-link>
-      | <router-link to="/average">Average</router-link>
-      | <router-link to="/lifetable">LifeTable</router-link>
+      <div>
+        <div class="ui button" @click="nocache">reload</div>
+      </div>
+      <div class="ui segment">
+        <router-link to="/">Home</router-link>
+        | <router-link to="/about">About</router-link>
+        | <router-link to="/average">Average</router-link>
+        | <router-link to="/plan">Financial Plan</router-link>
+        | <router-link to="/svg">SVG</router-link>
+        | <router-link to="/svg">SVG</router-link>
+        | <router-link to="/svg">SVG</router-link>
+        | <router-link to="/svg">SVG</router-link>
+      </div>
     </div>
     <router-view/>
   </div>
 </template>
+
+<script>
+export default {
+  methods: {
+    nocache () {
+      var script = document.createElement('script')
+      document.getElementsByTagName('head')[0].appendChild(script)
+      script.src = '/app.js?ts=' + new Date().getTime()
+    }
+  }
+}
+</script>
 
 <style lang="less">
 body {
