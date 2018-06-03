@@ -26,7 +26,6 @@ export default {
   },
   methods: {
     startDrag (e) {
-      // TODO これをboolではなくターゲットにして、イベントはっかは親のSVGタグにする
       this.setTarget(this)
       this.grabbing = true
       var pos = mouse.getPosition(e)
