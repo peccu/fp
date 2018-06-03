@@ -5,51 +5,73 @@
            :width="chartWidth" :height="chartHeight"
            :viewBox="'0 0 ' + chartWidth + ' ' + chartHeight"
            @touchmove="doDrag" @mousemove="doDrag">
-        <s-circle v-for="(circle, i) in data.circles" :key="i"
+        <s-circle v-for="(circle, i) in data.circles" :key="'circle' + i"
            :setTarget="setTarget" :attr="circle"></s-circle>
-        <rect x="10" y="10" width="50" height="50" rx="5" ry="5" />
+        <s-rect v-for="(rect, i) in data.rects" :key="'rect' + i"
+           :setTarget="setTarget" :attr="rect"></s-rect>
       </svg>
     </div>
-    <div> {{data}} </div>
     <div> W:{{chartWidth}}, H:{{chartHeight}} </div>
-    test
+    <pre style="text-align: left;">{{data}}</pre>
   </div>
 </template>
 
 <script>
 import $ from 'jquery'
 import SCircle from '@/components/svg/SCircle.vue'
+import SRect from '@/components/svg/SRect.vue'
 
 export default {
   name: 'DrawArea',
   components: {
-    SCircle
+    SCircle,
+    SRect
   },
   data () {
     return {
       dragging: null,
       data: {
+        rects: [
+          {
+            x: 10,
+            y: 10,
+            width: 50,
+            height: 50,
+            rx: 5,
+            ry: 5,
+            fill: 'red'
+          },
+          {
+            x: 40,
+            y: 10,
+            width: 80,
+            height: 80,
+            rx: 15,
+            ry: 5,
+            fill: 'green'
+          }
+        ],
         circles: [
           {
             dragging: false,
             cx: 150,
             cy: 150,
             r: 50,
-            color: 'blue'
+            fill: 'blue'
           },
           {
             dragging: false,
             cx: 100,
             cy: 200,
             r: 30,
-            color: 'orange'
+            fill: 'orange'
           },
           {
             dragging: false,
             cx: 100,
             cy: 200,
             r: 30,
-            color: 'orange'
+            fill: 'orange'
           }
         ]
       },
