@@ -10,9 +10,6 @@
         | <router-link to="/average">Average</router-link>
         | <router-link to="/plan">Financial Plan</router-link>
         | <router-link to="/svg">SVG</router-link>
-        | <router-link to="/svg">SVG</router-link>
-        | <router-link to="/svg">SVG</router-link>
-        | <router-link to="/svg">SVG</router-link>
       </div>
     </div>
     <router-view/>
