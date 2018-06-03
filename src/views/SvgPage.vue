@@ -1,7 +1,6 @@
 <template>
   <div class="svg">
     <h1>SVG</h1>
-    test
     <DrawArea/>
   </div>
 </template>
