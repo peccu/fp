@@ -6,17 +6,19 @@
            :viewBox="'0 0 ' + chartWidth + ' ' + chartHeight"
            @touchmove="doDrag" @mousemove="doDrag">
         <s-circle v-for="(circle, i) in data.circles" :key="'circle' + i"
-           :setTarget="setTarget" :attr="circle"></s-circle>
+           :setTarget="setTarget" :attr="circle" @input="update"></s-circle>
         <s-rect v-for="(rect, i) in data.rects" :key="'rect' + i"
-           :setTarget="setTarget" :attr="rect"></s-rect>
+           :setTarget="setTarget" :attr="rect" @input="update"></s-rect>
       </svg>
     </div>
+    <div>count: {{count}}, message: {{message}} <input v-model="message"/> </div>
     <div> W:{{chartWidth}}, H:{{chartHeight}} </div>
     <pre style="text-align: left;">{{data}}</pre>
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import $ from 'jquery'
 import SCircle from '@/components/svg/SCircle.vue'
 import SRect from '@/components/svg/SRect.vue'
@@ -30,56 +32,30 @@ export default {
   data () {
     return {
       dragging: null,
-      data: {
-        rects: [
-          {
-            x: 10,
-            y: 10,
-            width: 50,
-            height: 50,
-            rx: 5,
-            ry: 5,
-            fill: 'red'
-          },
-          {
-            x: 40,
-            y: 10,
-            width: 80,
-            height: 80,
-            rx: 15,
-            ry: 5,
-            fill: 'green'
-          }
-        ],
-        circles: [
-          {
-            dragging: false,
-            cx: 150,
-            cy: 150,
-            r: 50,
-            fill: 'blue'
-          },
-          {
-            dragging: false,
-            cx: 100,
-            cy: 200,
-            r: 30,
-            fill: 'orange'
-          },
-          {
-            dragging: false,
-            cx: 100,
-            cy: 200,
-            r: 30,
-            fill: 'orange'
-          }
-        ]
-      },
       chartWidth: $(window).width(),
       chartHeight: $(window).height() * 0.8
     }
   },
   computed: {
+    data: {
+      get () {
+        return this.$store.state.svgObject
+      },
+      set (value) {
+        this.$store.commit('updateSvg', value)
+      }
+    },
+    message: {
+      get () {
+        return this.$store.state.message
+      },
+      set (value) {
+        this.$store.commit('updateMessage', value)
+      }
+    },
+    ...mapState([
+      'count'
+    ])
   },
   mounted () {
     window.addEventListener('mouseup', this.stopDrag)
@@ -98,6 +74,9 @@ export default {
     },
     stopDrag () {
       this.dragging = null
+    },
+    update ($) {
+      this.$store.commit('updateSvg', this.data)
     }
   }
 }

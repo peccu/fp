@@ -32,6 +32,7 @@ export default {
     },
     stopDrag () {
       this.grabbing = false
+      this.$emit('input', this.attr)
     }
   }
 }
